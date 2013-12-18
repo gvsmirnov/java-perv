@@ -1,0 +1,13 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.openjdk.jmh', name: 'jmh-core', version: '0.2'
+}
