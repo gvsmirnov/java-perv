@@ -1,7 +1,7 @@
 Java Perversions
 ================
 
-Various java-related perversions. Do not try this in production. Unless you absolutely have to, in which case totally try it!
+Various java-related perversions. Do not try this in production. Unless you absolutely have to, or just feel like it, in which case totally do!
 
 labs-time
 ----------------
