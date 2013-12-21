@@ -1,13 +1,14 @@
 apply plugin: 'java'
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = JavaVersion.VERSION_1_7
 
 repositories {
+    mavenLocal()
     jcenter()
     mavenCentral()
 }
 
 dependencies {
     compile group: 'org.openjdk.jmh', name: 'jmh-core', version: '0.2'
+    compile group: 'args4j', name: 'args4j', version: '2.0.26'
 }
