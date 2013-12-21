@@ -9,6 +9,21 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.openjdk.jmh', name: 'jmh-core', version: '0.2'
-    compile group: 'args4j', name: 'args4j', version: '2.0.26'
+    compile 'org.openjdk.jmh:jmh-core:0.2'
+    compile 'args4j:args4j:2.0.26'
 }
+
+
+buildscript {
+    repositories {
+        maven {
+            name 'Gradle Shadow'
+            url 'http://dl.bintray.com/content/johnrengelman/gradle-plugins'
+        }
+    }
+    dependencies {
+        classpath 'org.gradle.plugins:shadow:0.7.4'
+    }
+}
+
+apply plugin: 'shadow'
