@@ -11,7 +11,7 @@ Usage:
 ```
 cd labs/
 gradle clean shadow
-java -cp build/libs/labs-unspecified-shadow.jar ru.gvsmirnov.perv.labs.time.TimerPrecisionTest
+java -cp build/libs/labs-unspecified-shadow.jar ru.gvsmirnov.perv.labs.time.PrecisionTest
 ```
 
 Currently supported time killers are: ```Thread.sleep()```, ```Locksupport.parkNanos()```, ```BlackHole.consumeCPU()```, spinloops
