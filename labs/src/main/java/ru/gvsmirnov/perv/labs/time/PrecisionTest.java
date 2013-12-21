@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import static ru.gvsmirnov.perv.labs.util.Util.*;
  
-public class TimerPrecisionTest {
+public class PrecisionTest {
 
     private static final long DEFAULT_MAX_RESOLUTION = TimeUnit.SECONDS.toNanos(2);
     private static final long DEFAULT_MIN_RESOLUTION = TimeUnit.NANOSECONDS.toNanos(100);
@@ -101,21 +101,21 @@ public class TimerPrecisionTest {
 
     public static void main(String[] args) throws CmdLineException {
 
-        TimerPrecisionTest timerPrecisionTest = new TimerPrecisionTest();
-        new CmdLineParser(timerPrecisionTest).parseArgument(args);
+        PrecisionTest precisionTest = new PrecisionTest();
+        new CmdLineParser(precisionTest).parseArgument(args);
 
         //FIXME: deal with warmup
 
-        timerPrecisionTest.estimatePrecision(new TimeKiller.Sleeper(), "Thread.sleep()");
-        timerPrecisionTest.estimatePrecision(new TimeKiller.Parker(), "LockSupport.parkNanos()");
-        timerPrecisionTest.estimatePrecision(new TimeKiller.Burner(), "spinning");
+        precisionTest.estimatePrecision(new TimeKiller.Sleeper(), "Thread.sleep()");
+        precisionTest.estimatePrecision(new TimeKiller.Parker(), "LockSupport.parkNanos()");
+        precisionTest.estimatePrecision(new TimeKiller.Burner(), "spinning");
 
 
         out("Estimating the number of BlackHole tokens per nano...");
         double tokensPerNano = TimeKiller.BlackHole.estimateTokensPerNano();
         out("BlackHole tokens per nano: %.4f", tokensPerNano);
 
-        timerPrecisionTest.estimatePrecision(new TimeKiller.BlackHole(tokensPerNano), "BlackHole.consumeCPU()");
+        precisionTest.estimatePrecision(new TimeKiller.BlackHole(tokensPerNano), "BlackHole.consumeCPU()");
 
     }
 }
