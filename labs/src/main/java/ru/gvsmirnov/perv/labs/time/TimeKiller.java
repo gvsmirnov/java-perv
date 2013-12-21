@@ -52,8 +52,7 @@ public interface TimeKiller {
             org.openjdk.jmh.logic.BlackHole.consumeCPU(A_LOT_OF_TOKENS);
             long end = System.nanoTime();
 
-            double ratio = ((double) A_LOT_OF_TOKENS) / (end - start) ;
-            return ratio;
+            return ((double) A_LOT_OF_TOKENS) / (end - start) ;
         }
     }
 

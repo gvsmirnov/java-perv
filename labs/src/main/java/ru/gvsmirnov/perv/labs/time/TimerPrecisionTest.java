@@ -107,7 +107,7 @@ public class TimerPrecisionTest {
         //FIXME: deal with warmup
 
         timerPrecisionTest.estimatePrecision(new TimeKiller.Sleeper(), "Thread.sleep()");
-        /*timerPrecisionTest.estimatePrecision(new TimeKiller.Parker(), "LockSupport.parkNanos()");
+        timerPrecisionTest.estimatePrecision(new TimeKiller.Parker(), "LockSupport.parkNanos()");
         timerPrecisionTest.estimatePrecision(new TimeKiller.Burner(), "spinning");
 
 
@@ -115,7 +115,7 @@ public class TimerPrecisionTest {
         double tokensPerNano = TimeKiller.BlackHole.estimateTokensPerNano();
         out("BlackHole tokens per nano: %.4f", tokensPerNano);
 
-        timerPrecisionTest.estimatePrecision(new TimeKiller.BlackHole(tokensPerNano), "BlackHole.consumeCPU()");*/
+        timerPrecisionTest.estimatePrecision(new TimeKiller.BlackHole(tokensPerNano), "BlackHole.consumeCPU()");
 
     }
 }
