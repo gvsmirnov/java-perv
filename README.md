@@ -15,3 +15,7 @@ java -cp build/libs/labs-unspecified-shadow.jar ru.gvsmirnov.perv.labs.time.Prec
 ```
 
 Currently supported time killers are: ```Thread.sleep()```, ```Locksupport.parkNanos()```, ```BlackHole.consumeCPU()```, spinloops
+
+labs-concurrency
+------------------
+Various investigations related to concurrency (e.g. http://habrahabr.ru/TODO:FINISH_THAT_ARTICLE)

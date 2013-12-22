@@ -56,6 +56,4 @@ public interface TimeKiller {
         }
     }
 
-
-
 }
