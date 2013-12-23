@@ -23,7 +23,7 @@ public interface TimeKiller {
         @Override
         public void kill(long nanos) {
             try {
-                // Thread.sleep(millis, nanos) uses rounding mode HALF_UP, but we need CEIL
+                // Thread.sleep(millis, nanos) uses rounding mode HALF_UP, but we need CEIL to maintain the contract
 
                 long millis = TimeUnit.NANOSECONDS.toMillis(nanos);
 
@@ -37,9 +37,6 @@ public interface TimeKiller {
         }
     }
 
-    /**
-     * In effect estimates the resolution of System.nanoTime()
-     */
     class Burner implements TimeKiller {
         @Override
         public void kill(long nanos) {
@@ -50,7 +47,7 @@ public interface TimeKiller {
 
     // TODO: BlackHole in fact does not perform linearly all the time
     // Nor, for that matter, is the time spent consuming the same number
-    // of tokens the same betwen runs
+    // of tokens the same between runs
     class BlackHole implements TimeKiller {
 
         private final double tokensPerNano;

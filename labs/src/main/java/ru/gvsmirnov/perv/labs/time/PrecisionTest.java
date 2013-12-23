@@ -6,7 +6,6 @@ import org.kohsuke.args4j.Option;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import static ru.gvsmirnov.perv.labs.util.Util.*;
@@ -32,7 +31,7 @@ public class PrecisionTest {
         if(!quiet) out("Estimating the precision of %s...", name);
 
         long left = minResolution, right = maxResolution;
-        long lastSuccessfulResolution = -1;
+        long resultingResolution = -1;
 
 
         while(right - left >= minResolution) {
@@ -45,16 +44,17 @@ public class PrecisionTest {
 
             if(precise) {
                 right = currentResolution - 1;
-                lastSuccessfulResolution= currentResolution;
+
+                resultingResolution = currentResolution * 2; // TODO: explain clearly why the multiplication
             } else {
                 left = currentResolution + 1;
             }
 
         }
 
-        if(!quiet) out("Precision of %s is %s", name, annotate(lastSuccessfulResolution));
+        if(!quiet) out("Precision of %s is %s", name, annotate(resultingResolution));
 
-        return lastSuccessfulResolution;
+        return resultingResolution;
     }
  
     private boolean isPrecise(TimeKiller timeKiller, long resolution, int iterations) {
@@ -109,7 +109,7 @@ public class PrecisionTest {
     private static final int WARMUP_ITERATIONS = 10_000 * 2; //just to be sure
 
     private static void warmup() {
-        out("%s Warming up...", new Date());
+        out("Warming up");
 
 
         PrecisionTest precisionTest = new PrecisionTest();
@@ -127,8 +127,8 @@ public class PrecisionTest {
         );
 
 
-        final int reportEvery = WARMUP_ITERATIONS / 100;
-        final int newLineEvery = reportEvery * 10;
+        final int reportEvery = WARMUP_ITERATIONS / 400;
+        final int newLineEvery = reportEvery * 80;
 
 
         for(int iteration = 1; iteration <= WARMUP_ITERATIONS; iteration++) {
@@ -143,8 +143,6 @@ public class PrecisionTest {
                 out();
         }
 
-        out("%s Warmup done!", new Date());
-
     }
 
     public static void main(String[] args) throws CmdLineException {
@@ -156,14 +154,18 @@ public class PrecisionTest {
 
         precisionTest.estimatePrecision(new TimeKiller.Sleeper(), "Thread.sleep()");
         precisionTest.estimatePrecision(new TimeKiller.Parker(), "LockSupport.parkNanos()");
+
+        // In effect, we measure how accurate System.nanoTime() is
         precisionTest.estimatePrecision(new TimeKiller.Burner(), "System.nanoTime()");
 
 
+        /*
         out("Estimating the number of BlackHole tokens per nano...");
         double tokensPerNano = TimeKiller.BlackHole.estimateTokensPerNano();
         out("BlackHole tokens per nano: %.4f", tokensPerNano);
 
         precisionTest.estimatePrecision(new TimeKiller.BlackHole(tokensPerNano), "BlackHole.consumeCPU()");
+        */
 
     }
 }
