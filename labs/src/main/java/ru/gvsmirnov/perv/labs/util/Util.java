@@ -46,8 +46,17 @@ public class Util {
         return (negative ? "-" : "") + fullPart + "." + fractionalPart + " " + shortName(unit);
     }
 
+    public static void out() {
+        out("");
+    }
+
     public static void out(String format, Object... args) {
-        System.out.println(String.format(format, args));
+        outClear(format, args);
+        System.out.println();
+    }
+
+    public static void outClear(String format, Object... args) {
+        System.out.print(String.format(format, args));
     }
 
 }

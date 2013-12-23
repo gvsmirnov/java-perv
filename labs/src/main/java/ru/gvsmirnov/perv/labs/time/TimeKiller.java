@@ -34,6 +34,9 @@ public interface TimeKiller {
         }
     }
 
+    // TODO: BlackHole in fact does not perform linearly all the time
+    // Nor, for that matter, is the time spent consuming the same number
+    // of tokens the same betwen runs
     class BlackHole implements TimeKiller {
 
         private final double tokensPerNano;
