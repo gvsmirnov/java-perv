@@ -64,7 +64,6 @@ public class PrecisionTest {
         }
 
         final long timeToKill = resolution * iterations;
-        final long startMillis = System.currentTimeMillis();
 
         long elapsedNanoTime = 0;
  
@@ -77,31 +76,31 @@ public class PrecisionTest {
             elapsedNanoTime += (endNanos - startNanos);
 
             long shouldHaveElapsed = killed + resolution;
-            long diff = Math.abs(shouldHaveElapsed - elapsedNanoTime);
 
-            if(diff > resolution) {
+            long totalOverhead = elapsedNanoTime - shouldHaveElapsed;
+
+            if(totalOverhead < 0) {
+                throw new AssertionError(
+                        String.format(
+                                "Should have elapsed at least %d, elapsed only %d (%.3f iterations lost)",
+                                shouldHaveElapsed, elapsedNanoTime, (-1.0 * totalOverhead) / resolution
+                        )
+                );
+            }
+
+            long overheadPerInvocation = (totalOverhead) / (shouldHaveElapsed / resolution);
+
+            if(overheadPerInvocation > resolution) {
                 if(verbose) {
                     out("Cumulative error has exceeded allowed threshold, aborting." +
                         "\n\tElapsed time: %s" +
-                        "\n\tExpected time: %s\n",
-                        annotate(elapsedNanoTime), annotate(shouldHaveElapsed)
+                        "\n\tExpected time: %s" +
+                        "\n\tOverhead per invocation: %s\n",
+                        annotate(elapsedNanoTime), annotate(shouldHaveElapsed), annotate(overheadPerInvocation)
                     );
                 }
                 return false;
             }
-        }
-
-        if(verbose) {
-            long endMillis = System.currentTimeMillis();
-
-            long elapsedMilliTime = TimeUnit.MILLISECONDS.toNanos(endMillis - startMillis);
-
-            out("Elapsed time:" +
-                    "\n\tAccording to currentTimeMillis(): %s" +
-                    "\n\tAccording to nanoTime(): %s" +
-                    "\n\tExpected: %s\n",
-                    annotate(elapsedMilliTime), annotate(elapsedNanoTime), annotate(timeToKill)
-            );
         }
  
         return true;
