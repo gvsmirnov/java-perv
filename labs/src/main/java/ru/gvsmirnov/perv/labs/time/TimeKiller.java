@@ -23,11 +23,14 @@ public interface TimeKiller {
         }
     }
 
+    /**
+     * Effectively estimates the resolution of System.nanoTime()
+     */
     class Burner implements TimeKiller {
         @Override
         public void kill(long nanos) {
             long endTime = System.nanoTime() + nanos;
-            while(System.nanoTime() < endTime); // TODO: check if DCE is really sparing this loop thanks to the syscall
+            while(System.nanoTime() < endTime);
         }
     }
 

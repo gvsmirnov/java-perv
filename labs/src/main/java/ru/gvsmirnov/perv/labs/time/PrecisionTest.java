@@ -22,7 +22,7 @@ public class PrecisionTest {
     @Option(name = "-v", usage = "Verbose")
     private boolean verbose = false;
 
-    private void estimatePrecision(TimeKiller killer, String name) {
+    private long estimatePrecision(TimeKiller killer, String name) {
         out("Estimating the precision of %s...", name);
 
         long left = minResolution, right = maxResolution;
@@ -47,6 +47,8 @@ public class PrecisionTest {
         }
 
         out("Precision of %s is %s", name, annotate(lastSuccessfulResolution));
+
+        return lastSuccessfulResolution;
     }
  
     private boolean isPrecise(TimeKiller timeKiller, long resolution, int iterations) {
@@ -61,6 +63,7 @@ public class PrecisionTest {
         long elapsedNanoTime = 0;
  
         for(long killed = 0; killed < timeToKill; killed += resolution) {
+
             long startNanos  = System.nanoTime();
             timeKiller.kill(resolution);
             long endNanos  = System.nanoTime();
@@ -85,7 +88,6 @@ public class PrecisionTest {
         if(verbose) {
             long endMillis = System.currentTimeMillis();
 
-
             long elapsedMilliTime = TimeUnit.MILLISECONDS.toNanos(endMillis - startMillis);
 
             out("Elapsed time:" +
@@ -108,13 +110,15 @@ public class PrecisionTest {
 
         precisionTest.estimatePrecision(new TimeKiller.Sleeper(), "Thread.sleep()");
         precisionTest.estimatePrecision(new TimeKiller.Parker(), "LockSupport.parkNanos()");
-        precisionTest.estimatePrecision(new TimeKiller.Burner(), "spinning");
+        precisionTest.estimatePrecision(new TimeKiller.Burner(), "System.currentNanos()");
 
 
         out("Estimating the number of BlackHole tokens per nano...");
         double tokensPerNano = TimeKiller.BlackHole.estimateTokensPerNano();
         out("BlackHole tokens per nano: %.4f", tokensPerNano);
 
+
+        //FIXME: deal with BlackHole's stability and linearity
         precisionTest.estimatePrecision(new TimeKiller.BlackHole(tokensPerNano), "BlackHole.consumeCPU()");
 
     }
