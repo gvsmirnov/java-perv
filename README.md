@@ -14,7 +14,7 @@ gradle clean shadow
 java -cp build/libs/labs-unspecified-shadow.jar ru.gvsmirnov.perv.labs.time.PrecisionTest
 ```
 
-Currently supported time killers are: ```Thread.sleep()```, ```Locksupport.parkNanos()```, ```BlackHole.consumeCPU()```, and a spinlooper that relies on ```System.currentNanos()```.
+Currently supported time killers are: ```Thread.sleep()```, ```Locksupport.parkNanos()```, ```BlackHole.consumeCPU()```, and a spinlooper that relies on ```System.nanoTime()```.
 
 labs-concurrency
 ------------------

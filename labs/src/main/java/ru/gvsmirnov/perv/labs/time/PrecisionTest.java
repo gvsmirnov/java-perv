@@ -157,7 +157,7 @@ public class PrecisionTest {
 
         precisionTest.estimatePrecision(new TimeKiller.Sleeper(), "Thread.sleep()");
         precisionTest.estimatePrecision(new TimeKiller.Parker(), "LockSupport.parkNanos()");
-        precisionTest.estimatePrecision(new TimeKiller.Burner(), "System.currentNanos()");
+        precisionTest.estimatePrecision(new TimeKiller.Burner(), "System.nanoTime()");
 
 
         out("Estimating the number of BlackHole tokens per nano...");
