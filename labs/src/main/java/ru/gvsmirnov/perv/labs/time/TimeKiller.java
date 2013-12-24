@@ -5,11 +5,6 @@ import java.util.concurrent.locks.LockSupport;
 
 public interface TimeKiller {
 
-    /**
-     * The contract of this method is that it takes <i>at least</i> <tt>nanos</tt> ns to execute.
-     * It is okay to run longer, but not okay to run shorter.
-     * @param nanos the minimum number of nanoseconds that this method should take to run
-     */
     void kill(long nanos);
 
     class Parker implements TimeKiller {
@@ -23,16 +18,7 @@ public interface TimeKiller {
         @Override
         public void kill(long nanos) {
             try {
-                // Thread.sleep(millis, nanos) uses rounding mode HALF_UP, but we need CEIL to maintain the contract
-
-                long millis = TimeUnit.NANOSECONDS.toMillis(nanos);
-
-                long remainder = nanos - TimeUnit.MILLISECONDS.toNanos(millis);
-                if(remainder > 0)
-                    millis ++;
-
-                Thread.sleep(millis);
-
+                TimeUnit.NANOSECONDS.sleep(nanos);
             } catch (InterruptedException ignored) {}
         }
     }
