@@ -28,13 +28,16 @@ Windows Box
 
 ```
 Benchmark                                     Mode Thr     Count  Sec         Mean   Mean error    Units
-r.g.p.l.t.TimeKillerBenchmark.burnOneMs     sample   1     19984    1      999.693        0.114    us/op
-r.g.p.l.t.TimeKillerBenchmark.burnTwoMs     sample   1     10000    1     1999.262        0.201    us/op
-r.g.p.l.t.TimeKillerBenchmark.getNanoTime   sample   1  21824817    1        0.070        0.000    us/op
-r.g.p.l.t.TimeKillerBenchmark.parkOneMs     sample   1     19896    1     1004.414        5.953    us/op
-r.g.p.l.t.TimeKillerBenchmark.parkTwoMs     sample   1     10013    1     1997.918        1.987    us/op
-r.g.p.l.t.TimeKillerBenchmark.sleepOneMs    sample   1     19913    1     1003.507        4.621    us/op
-r.g.p.l.t.TimeKillerBenchmark.sleepTwoMs    sample   1     10011    1     1997.825        2.117    us/op
+r.g.p.l.t.TimeKillerBenchmark.burnOneMs     sample   1     19989    1      999.672        0.108    us/op
+r.g.p.l.t.TimeKillerBenchmark.burnOneNs     sample   1  20232856    1        0.495        0.001    us/op
+r.g.p.l.t.TimeKillerBenchmark.burnTwoMs     sample   1     10000    1     1999.037        0.114    us/op
+r.g.p.l.t.TimeKillerBenchmark.getNanoTime   sample   1  23745894    1        0.066        0.000    us/op
+r.g.p.l.t.TimeKillerBenchmark.parkOneMs     sample   1     20004    1      998.957        1.811    us/op
+r.g.p.l.t.TimeKillerBenchmark.parkOneNs     sample   1     20012    1      998.565        1.389    us/op
+r.g.p.l.t.TimeKillerBenchmark.parkTwoMs     sample   1     10013    1     1998.168        2.678    us/op
+r.g.p.l.t.TimeKillerBenchmark.sleepOneMs    sample   1     20011    1      998.441        1.462    us/op
+r.g.p.l.t.TimeKillerBenchmark.sleepOneNs    sample   1     20009    1      998.668        1.640    us/op
+r.g.p.l.t.TimeKillerBenchmark.sleepTwoMs    sample   1     10014    1     1997.672        1.998    us/op
 ```
 
 ```
