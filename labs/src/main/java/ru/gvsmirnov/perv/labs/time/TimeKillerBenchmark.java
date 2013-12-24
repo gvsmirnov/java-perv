@@ -31,6 +31,11 @@ public class TimeKillerBenchmark {
     }
 
     @GenerateMicroBenchmark
+    public void sleepOneNs() {
+        sleeper.kill(TimeUnit.NANOSECONDS.toNanos(1));
+    }
+
+    @GenerateMicroBenchmark
     public void parkOneMs() {
         parker.kill(TimeUnit.MILLISECONDS.toNanos(1));
     }
@@ -41,6 +46,11 @@ public class TimeKillerBenchmark {
     }
 
     @GenerateMicroBenchmark
+    public void parkOneNs() {
+        parker.kill(TimeUnit.NANOSECONDS.toNanos(1));
+    }
+
+    @GenerateMicroBenchmark
     public void burnOneMs() {
         burner.kill(TimeUnit.MILLISECONDS.toNanos(1));
     }
@@ -48,6 +58,11 @@ public class TimeKillerBenchmark {
     @GenerateMicroBenchmark
     public void burnTwoMs() {
         burner.kill(TimeUnit.MILLISECONDS.toNanos(2));
+    }
+
+    @GenerateMicroBenchmark
+    public void burnOneNs() {
+        burner.kill(TimeUnit.NANOSECONDS.toNanos(1));
     }
 
     @GenerateMicroBenchmark
