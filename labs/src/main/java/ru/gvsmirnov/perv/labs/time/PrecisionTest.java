@@ -77,26 +77,16 @@ public class PrecisionTest {
 
             long shouldHaveElapsed = killed + resolution;
 
-            long totalOverhead = elapsedNanoTime - shouldHaveElapsed;
+            long totalError = Math.abs(elapsedNanoTime - shouldHaveElapsed);
+            long errorPerInvocation = (totalError) / (shouldHaveElapsed / resolution);
 
-            if(totalOverhead < 0) {
-                throw new AssertionError(
-                        String.format(
-                                "Should have elapsed at least %d, elapsed only %d (%.3f iterations lost)",
-                                shouldHaveElapsed, elapsedNanoTime, (-1.0 * totalOverhead) / resolution
-                        )
-                );
-            }
-
-            long overheadPerInvocation = (totalOverhead) / (shouldHaveElapsed / resolution);
-
-            if(overheadPerInvocation > resolution) {
+            if(errorPerInvocation > resolution) {
                 if(verbose) {
                     out("Cumulative error has exceeded allowed threshold, aborting." +
                         "\n\tElapsed time: %s" +
                         "\n\tExpected time: %s" +
-                        "\n\tOverhead per invocation: %s\n",
-                        annotate(elapsedNanoTime), annotate(shouldHaveElapsed), annotate(overheadPerInvocation)
+                        "\n\tError per invocation: %s\n",
+                        annotate(elapsedNanoTime), annotate(shouldHaveElapsed), annotate(errorPerInvocation)
                     );
                 }
                 return false;
@@ -122,8 +112,8 @@ public class PrecisionTest {
         Collection<TimeKiller> timeKillers = Arrays.asList(
                 new TimeKiller.Sleeper(),
                 new TimeKiller.Parker(),
-                new TimeKiller.Burner(),
-                new TimeKiller.BlackHole(1)
+                new TimeKiller.Burner()
+                //new TimeKiller.BlackHole(1)
         );
 
 
