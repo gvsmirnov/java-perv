@@ -11,14 +11,19 @@ Usage:
 ```
 cd labs/
 gradle clean shadow
-java -cp build/libs/labs-unspecified-shadow.jar ru.gvsmirnov.perv.labs.time.PrecisionTest
+java -cp build/libs/perverted-labs-0.1.jar ru.gvsmirnov.perv.labs.time.PrecisionTest
 ```
 
 Currently supported time killers are: ```Thread.sleep()```, ```Locksupport.parkNanos()```, ```BlackHole.consumeCPU()```, and a spinlooper that relies on ```System.nanoTime()```.
 
 To make sure that you are not getting rubbish results due to internal VM activity, run it with
 ```
-java -XX:+PrintCompilation -XX:+UnlockDiagnosticVMOptions -verbose:gc -XX:+PrintInlining -XX:+PrintSafepointStatistics -XX:PrintSafepointStatisticsCount=1 -cp build/libs/labs-unspecified-shadow.jar ru.gvsmirnov.perv.labs.time.PrecisionTest -v
+java -XX:+PrintCompilation -XX:+UnlockDiagnosticVMOptions -verbose:gc -XX:+PrintInlining -XX:+PrintSafepointStatistics -XX:PrintSafepointStatisticsCount=1 -cp build/libs/perverted-labs-0.1.jar ru.gvsmirnov.perv.labs.time.PrecisionTest -v
+```
+
+The precision may be affected by both resolution and by invocation cost. Use this command to estimate the invocation cost:
+```
+java -cp build/libs/perverted-labs-0.1.jar org.openjdk.jmh.Main -f -tu us -bm sample
 ```
 
 labs-concurrency
