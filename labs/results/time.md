@@ -3,14 +3,17 @@ Linux Laptop
 3816 MB RAM; Intel(R) Core(TM) i3 CPU M 380  @ 2.53GHz
 
 ```
-Benchmark                                        Mode Thr     Count  Sec         Mean   Mean error    Units
-r.g.p.l.t.TimeKillerBenchmark.burnOneMs        sample   1     20008    1      999.577        0.064    us/op
-r.g.p.l.t.TimeKillerBenchmark.burnTwoMs        sample   1     10007    1     1998.997        0.063    us/op
-r.g.p.l.t.TimeKillerBenchmark.getNanoTime      sample   1  23832661    1        0.067        0.000    us/op
-r.g.p.l.t.TimeKillerBenchmark.parkOneMs        sample   1     17934    1     1114.076        1.698    us/op
-r.g.p.l.t.TimeKillerBenchmark.parkTwoMs        sample   1      9472    1     2110.587        2.262    us/op
-r.g.p.l.t.TimeKillerBenchmark.sleepOneMs       sample   1     18288    1     1092.754        1.803    us/op
-r.g.p.l.t.TimeKillerBenchmark.sleepTwoMs       sample   1      9408    1     2124.348        4.071    us/op
+Benchmark                                     Mode Thr     Count  Sec         Mean   Mean error    Units
+r.g.p.l.t.TimeKillerBenchmark.burnOneMs     sample   1     20003    1      999.652        0.217    us/op
+r.g.p.l.t.TimeKillerBenchmark.burnOneNs     sample   1  24245077    1        0.110        0.001    us/op
+r.g.p.l.t.TimeKillerBenchmark.burnTwoMs     sample   1     10005    1     1998.941        0.046    us/op
+r.g.p.l.t.TimeKillerBenchmark.getNanoTime   sample   1  21232069    1        0.074        0.000    us/op
+r.g.p.l.t.TimeKillerBenchmark.parkOneMs     sample   1     18210    1     1097.345        3.912    us/op
+r.g.p.l.t.TimeKillerBenchmark.parkOneNs     sample   1    322256    1       61.871        0.135    us/op
+r.g.p.l.t.TimeKillerBenchmark.parkTwoMs     sample   1      9491    1     2105.804        5.576    us/op
+r.g.p.l.t.TimeKillerBenchmark.sleepOneMs    sample   1     18135    1     1101.718        1.175    us/op
+r.g.p.l.t.TimeKillerBenchmark.sleepOneNs    sample   1     18178    1     1099.514        4.258    us/op
+r.g.p.l.t.TimeKillerBenchmark.sleepTwoMs    sample   1      9497    1     2104.680        6.870    us/op
 ```
 
 ```
