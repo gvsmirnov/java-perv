@@ -23,7 +23,7 @@ java -XX:+PrintCompilation -XX:+UnlockDiagnosticVMOptions -verbose:gc -XX:+Print
 
 The precision may be affected by both resolution and by invocation cost. Use this command to estimate the invocation cost:
 ```
-java -cp build/libs/perverted-labs-0.1.jar org.openjdk.jmh.Main -f -tu us -bm sample
+java -cp build/libs/perverted-labs-0.1.jar org.openjdk.jmh.Main "ru.gvsmirnov.perv.labs.time.*" -f -tu us -bm sample
 ```
 
 labs-concurrency
