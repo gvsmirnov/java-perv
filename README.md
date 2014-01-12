@@ -5,16 +5,15 @@ Various java-related perversions. Do not try this in production. Unless you abso
 
 labs-time
 ----------------
-A tool that tries to empirically estimate the precision of the various time-killers available.
+A tool that tries to empirically estimate the precision of various ways to bide your time in java..
 
 Usage:
 ```
 cd labs/
 gradle clean shadow
-java -cp build/libs/perverted-labs-0.1.jar ru.gvsmirnov.perv.labs.time.PrecisionTest
+java -XX:-UseBiasedLocking -cp build/libs/perverted-labs-0.1.jar ru.gvsmirnov.perv.labs.time.PrecisionTest
 ```
 
-Currently supported time killers are: ```Thread.sleep()```, ```Locksupport.parkNanos()```, ```BlackHole.consumeCPU()```, and a spinlooper that relies on ```System.nanoTime()```.
 
 To make sure that you are not getting rubbish results due to internal VM activity, run it with
 ```

@@ -111,8 +111,13 @@ public class PrecisionTest {
 
         Collection<TimeKiller> timeKillers = Arrays.asList(
                 new TimeKiller.Sleeper(),
-                new TimeKiller.Parker(),
-                new TimeKiller.Burner()
+                new TimeKiller.TimedParker(),
+                new TimeKiller.Burner(),
+                new TimeKiller.Yielder(),
+                new TimeKiller.TimedWaiter(),
+
+                new ObsessedTimeKiller.UntimedParker(),
+                new ObsessedTimeKiller.UntimedWaiter()
                 //new TimeKiller.BlackHole(1)
         );
 
@@ -123,7 +128,7 @@ public class PrecisionTest {
 
         for(int iteration = 1; iteration <= WARMUP_ITERATIONS; iteration++) {
             for(TimeKiller timeKiller : timeKillers) {
-                precisionTest.estimatePrecision(timeKiller, null);
+                precisionTest.estimatePrecision(timeKiller, timeKiller.getClass().getSimpleName());
             }
 
             if(iteration % reportEvery == 0)
@@ -143,10 +148,17 @@ public class PrecisionTest {
         new CmdLineParser(precisionTest).parseArgument(args);
 
         precisionTest.estimatePrecision(new TimeKiller.Sleeper(), "Thread.sleep()");
-        precisionTest.estimatePrecision(new TimeKiller.Parker(), "LockSupport.parkNanos()");
+        precisionTest.estimatePrecision(new TimeKiller.TimedParker(), "LockSupport.parkNanos()");
 
         // In effect, we measure how accurate System.nanoTime() is
         precisionTest.estimatePrecision(new TimeKiller.Burner(), "System.nanoTime()");
+
+        precisionTest.estimatePrecision(new TimeKiller.Yielder(), "Thread.yield()");
+        precisionTest.estimatePrecision(new TimeKiller.TimedWaiter(), "Object.wait(millis, nanos)");
+
+        precisionTest.estimatePrecision(new ObsessedTimeKiller.UntimedParker(), "LockSupport.park()");
+
+        precisionTest.estimatePrecision(new ObsessedTimeKiller.UntimedWaiter(), "Object.wait()");
 
 
         /*

@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class TimeKillerBenchmark {
 
     private final TimeKiller.Sleeper sleeper = new TimeKiller.Sleeper();
-    private final TimeKiller.Parker parker = new TimeKiller.Parker();
+    private final TimeKiller.TimedParker timedParker = new TimeKiller.TimedParker();
     private final TimeKiller.Burner burner = new TimeKiller.Burner();
     //TODO: add black hole
 
@@ -37,17 +37,17 @@ public class TimeKillerBenchmark {
 
     @GenerateMicroBenchmark
     public void parkOneMs() {
-        parker.kill(TimeUnit.MILLISECONDS.toNanos(1));
+        timedParker.kill(TimeUnit.MILLISECONDS.toNanos(1));
     }
 
     @GenerateMicroBenchmark
     public void parkTwoMs() {
-        parker.kill(TimeUnit.MILLISECONDS.toNanos(2));
+        timedParker.kill(TimeUnit.MILLISECONDS.toNanos(2));
     }
 
     @GenerateMicroBenchmark
     public void parkOneNs() {
-        parker.kill(TimeUnit.NANOSECONDS.toNanos(1));
+        timedParker.kill(TimeUnit.NANOSECONDS.toNanos(1));
     }
 
     @GenerateMicroBenchmark

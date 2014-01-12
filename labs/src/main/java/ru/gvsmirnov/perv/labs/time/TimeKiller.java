@@ -3,38 +3,69 @@ package ru.gvsmirnov.perv.labs.time;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
-public interface TimeKiller {
+public abstract class TimeKiller {
 
-    void kill(long nanos);
+    public final void kill(long nanos) {
 
-    class Parker implements TimeKiller {
-        @Override
-        public void kill(long nanos) {
-            LockSupport.parkNanos(nanos);
+        long endTime = System.nanoTime() + nanos;
+        long remainingTime;
+
+        while((remainingTime = endTime - System.nanoTime()) > 0) {
+            tryKill(remainingTime);
         }
     }
 
-    class Sleeper implements TimeKiller {
+    protected abstract void tryKill(long nanosToKill);
+
+    public static class TimedParker extends TimeKiller {
         @Override
-        public void kill(long nanos) {
+        public void tryKill(long nanosToKill) {
+            LockSupport.parkNanos(nanosToKill);
+        }
+    }
+
+    public static class Sleeper extends TimeKiller {
+        @Override
+        public void tryKill(long nanosToKill) {
             try {
-                TimeUnit.NANOSECONDS.sleep(nanos);
+                TimeUnit.NANOSECONDS.sleep(nanosToKill);
             } catch (InterruptedException ignored) {}
         }
     }
 
-    class Burner implements TimeKiller {
+    public static class Burner extends TimeKiller {
         @Override
-        public void kill(long nanos) {
-            long endTime = System.nanoTime() + nanos;
-            while(System.nanoTime() < endTime);
+        public void tryKill(long _) {}
+    }
+
+    public static class Yielder extends TimeKiller {
+        @Override
+        public void tryKill(long _) {
+            Thread.yield();
+        }
+    }
+
+    public static class TimedWaiter extends TimeKiller {
+
+        private final Object object = new Object();
+
+        @Override
+        public void tryKill(long nanosToKill) {
+            long millis = TimeUnit.NANOSECONDS.toMillis(nanosToKill);
+            long nanos = nanosToKill % TimeUnit.MILLISECONDS.toNanos(1);
+
+            try {
+                synchronized (object) {
+                    object.wait(millis, (int) nanos);
+                }
+            } catch (InterruptedException ignored) {}
         }
     }
 
     // TODO: BlackHole in fact does not perform linearly all the time
     // Nor, for that matter, is the time spent consuming the same number
     // of tokens the same between runs
-    class BlackHole implements TimeKiller {
+    public static class BlackHole extends TimeKiller {
 
         private final double tokensPerNano;
 
@@ -43,8 +74,8 @@ public interface TimeKiller {
         }
 
         @Override
-        public void kill(long nanos) {
-            org.openjdk.jmh.logic.BlackHole.consumeCPU((long) (tokensPerNano * nanos));
+        public void tryKill(long nanosToKill) {
+            org.openjdk.jmh.logic.BlackHole.consumeCPU((long) (tokensPerNano * nanosToKill));
         }
 
 
