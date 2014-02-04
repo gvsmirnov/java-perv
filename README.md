@@ -27,4 +27,4 @@ java -cp build/libs/perverted-labs-0.1.jar org.openjdk.jmh.Main "ru.gvsmirnov.pe
 
 labs-concurrency
 ------------------
-Various investigations related to concurrency (e.g. http://habrahabr.ru/TODO:FINISH_THAT_ARTICLE)
+Various investigations related to concurrency (e.g. http://habrahabr.ru/post/209128/)

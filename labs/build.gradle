@@ -18,6 +18,7 @@ dependencies {
 
 buildscript {
     repositories {
+        jcenter()
         maven {
             name 'Gradle Shadow'
             url 'http://dl.bintray.com/content/johnrengelman/gradle-plugins'
