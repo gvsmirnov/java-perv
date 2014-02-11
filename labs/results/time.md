@@ -1,5 +1,12 @@
+Warning: Work In Progress
+-------------------------
+These are preliminary results, which are very likely to to contain errors and to be incomplete.
+Use them with extreme caution. Better yet, measure things on your own. Don't forget to make sure that
+you are really measuring what you think you're measuring.
+
+
 Linux Laptop
-------------------------
+------------
 3816 MB RAM; Intel(R) Core(TM) i3 CPU M 380  @ 2.53GHz
 
 ```
@@ -33,8 +40,29 @@ Estimating the precision of Object.wait()...
 Precision of Object.wait() is 250.0 ms
 ```
 
+Macbook Pro
+-----------
+16 GB RAM; 2.6 GHz Intel Core i7 (Haswell, model unknown)
+
+```
+Estimating the precision of Thread.sleep()...
+Precision of Thread.sleep() is 1.282 ms
+Estimating the precision of LockSupport.parkNanos()...
+Precision of LockSupport.parkNanos() is 31.70 us
+Estimating the precision of System.nanoTime()...
+Precision of System.nanoTime() is 2.222 us
+Estimating the precision of Thread.yield()...
+Precision of Thread.yield() is 1.30 us
+Estimating the precision of Object.wait(millis, nanos)...
+Precision of Object.wait(millis, nanos) is 1.275 ms
+Estimating the precision of LockSupport.park()...
+Precision of LockSupport.park() is 62.500 ms
+Estimating the precision of Object.wait()...
+Precision of Object.wait() is 30.714 us
+```
+
 Windows Box
-------------------------
+-----------
 4079 MB RAM; Intel(R) Xeon(R) CPU E5606 @ 2.13GHz
 
 ```
