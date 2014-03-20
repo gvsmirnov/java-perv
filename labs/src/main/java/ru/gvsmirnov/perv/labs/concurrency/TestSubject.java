@@ -28,20 +28,14 @@ public class TestSubject {
             final TestSubject poorGuy = new TestSubject();
             final CountDownLatch latch = new CountDownLatch(2);
 
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    poorGuy.executedOnCpu1();
-                    latch.countDown();
-                }
+            executor.execute(() -> {
+                poorGuy.executedOnCpu1();
+                latch.countDown();
             });
 
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    poorGuy.executedOnCpu0();
-                    latch.countDown();
-                }
+            executor.execute(() -> {
+                poorGuy.executedOnCpu0();
+                latch.countDown();
             });
 
             latch.await();

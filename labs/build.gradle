@@ -1,8 +1,8 @@
 apply plugin: 'java'
 
 
-version = 0.1
-sourceCompatibility = JavaVersion.VERSION_1_7
+version = "0.0.1"
+sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenLocal()
@@ -11,27 +11,31 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openjdk.jmh:jmh-core:0.2'
+    compile 'org.openjdk.jmh:jmh-core:0.5.3'
+    compile 'org.openjdk.jmh:jmh-generator-annprocess:0.5.3'
+
     compile 'args4j:args4j:2.0.26'
+
+    compile 'com.fasterxml.jackson.core:jackson-core:2.3.2'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
 }
 
 
 buildscript {
     repositories {
         jcenter()
-        maven {
-            name 'Gradle Shadow'
-            url 'http://dl.bintray.com/content/johnrengelman/gradle-plugins'
-        }
     }
     dependencies {
-        classpath 'org.gradle.plugins:shadow:0.7.4'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:0.8'
     }
 }
 
 apply plugin: 'shadow'
 
 shadow {
-    baseName = "perverted-labs"
+    classifier="benchmarks"
     artifactAttached = false
+    transformer(com.github.jengelman.gradle.plugins.shadow.transformers.ManifestResourceTransformer) {
+        mainClass = "org.openjdk.jmh.Main"
+    }
 }

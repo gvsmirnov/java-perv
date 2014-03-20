@@ -127,9 +127,9 @@ public class PrecisionTest {
 
 
         for(int iteration = 1; iteration <= WARMUP_ITERATIONS; iteration++) {
-            for(TimeKiller timeKiller : timeKillers) {
+            timeKillers.forEach((timeKiller) -> {
                 precisionTest.estimatePrecision(timeKiller, timeKiller.getClass().getSimpleName());
-            }
+            });
 
             if(iteration % reportEvery == 0)
                 outClear(".");
