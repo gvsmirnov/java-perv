@@ -1,5 +1,7 @@
 package ru.gvsmirnov.perv.labs.time;
 
+import org.openjdk.jmh.infra.Blackhole;
+
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
@@ -75,7 +77,7 @@ public abstract class TimeKiller {
 
         @Override
         public void tryKill(long nanosToKill) {
-            org.openjdk.jmh.logic.BlackHole.consumeCPU((long) (tokensPerNano * nanosToKill));
+            Blackhole.consumeCPU((long) (tokensPerNano * nanosToKill));
         }
 
 
@@ -83,7 +85,7 @@ public abstract class TimeKiller {
 
         public static double estimateTokensPerNano() {
             long start = System.nanoTime();
-            org.openjdk.jmh.logic.BlackHole.consumeCPU(A_LOT_OF_TOKENS);
+            Blackhole.consumeCPU(A_LOT_OF_TOKENS);
             long end = System.nanoTime();
 
             return ((double) A_LOT_OF_TOKENS) / (end - start) ;

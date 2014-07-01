@@ -1,6 +1,6 @@
 package ru.gvsmirnov.perv.labs.time;
 
-import org.openjdk.jmh.annotations.GenerateMicroBenchmark;
+import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
@@ -20,52 +20,52 @@ public class TimeKillerBenchmark {
     private final TimeKiller.Burner burner = new TimeKiller.Burner();
     //TODO: add black hole
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public void sleepOneMs() {
         sleeper.kill(TimeUnit.MILLISECONDS.toNanos(1));
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public void sleepTwoMs() {
         sleeper.kill(TimeUnit.MILLISECONDS.toNanos(2));
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public void sleepOneNs() {
         sleeper.kill(TimeUnit.NANOSECONDS.toNanos(1));
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public void parkOneMs() {
         timedParker.kill(TimeUnit.MILLISECONDS.toNanos(1));
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public void parkTwoMs() {
         timedParker.kill(TimeUnit.MILLISECONDS.toNanos(2));
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public void parkOneNs() {
         timedParker.kill(TimeUnit.NANOSECONDS.toNanos(1));
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public void burnOneMs() {
         burner.kill(TimeUnit.MILLISECONDS.toNanos(1));
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public void burnTwoMs() {
         burner.kill(TimeUnit.MILLISECONDS.toNanos(2));
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public void burnOneNs() {
         burner.kill(TimeUnit.NANOSECONDS.toNanos(1));
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     @OutputTimeUnit(TimeUnit.NANOSECONDS)
     public void getNanoTime() {
         System.nanoTime(); // being a syscall, spared by DCE

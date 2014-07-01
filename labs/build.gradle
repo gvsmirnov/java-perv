@@ -11,8 +11,8 @@ repositories {
 }
 
 dependencies {
-    compile 'org.openjdk.jmh:jmh-core:0.5.3'
-    compile 'org.openjdk.jmh:jmh-generator-annprocess:0.5.3'
+    compile 'org.openjdk.jmh:jmh-core:0.9'
+    compile 'org.openjdk.jmh:jmh-generator-annprocess:0.9'
 
     compile 'args4j:args4j:2.0.26'
 

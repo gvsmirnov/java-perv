@@ -1,55 +1,55 @@
 package ru.gvsmirnov.perv.labs.concurrency;
 
-import org.openjdk.jmh.annotations.GenerateMicroBenchmark;
+import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Group;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 
 public class VolatileBenchmark {
 
-    @GenerateMicroBenchmark
+    @Benchmark
     @Group("plainLocal")
     public int plainLocalRead(PlainLocal value) {
         return value.value;
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     @Group("plainLocal")
     public int plainLocalIncrement(PlainLocal value) {
         return value.value++;
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     @Group("plainShared")
     public int plainSharedRead(PlainShared value) {
         return value.value;
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     @Group("plainShared")
     public int plainSharedIncrement(PlainShared value) {
         return value.value++;
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     @Group("volatileLocal")
     public int plainVolatileRead(VolatileLocal value) {
         return value.value;
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     @Group("volatileLocal")
     public int plainVolatileIncrement(VolatileLocal value) {
         return value.value++;
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     @Group("volatileShared")
     public int plainVolatileRead(VolatileShared value) {
         return value.value;
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     @Group("volatileShared")
     public int plainVolatileIncrement(VolatileShared value) {
         return value.value++;
