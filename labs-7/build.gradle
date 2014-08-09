@@ -1,0 +1,11 @@
+apply plugin: 'java'
+
+sourceCompatibility = JavaVersion.VERSION_1_7
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'org.javassist:javassist:3.18.0-GA'
+}
