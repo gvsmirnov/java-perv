@@ -22,20 +22,10 @@ dependencies {
 
 
 buildscript {
-    repositories {
-        jcenter()
-    }
+    repositories { jcenter() }
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:0.8'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.0.3'
     }
 }
 
-apply plugin: 'shadow'
-
-shadow {
-    classifier="benchmarks"
-    artifactAttached = false
-    transformer(com.github.jengelman.gradle.plugins.shadow.transformers.ManifestResourceTransformer) {
-        mainClass = "org.openjdk.jmh.Main"
-    }
-}
+apply plugin: 'com.github.johnrengelman.shadow'
