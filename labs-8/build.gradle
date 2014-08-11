@@ -17,7 +17,7 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-core:2.3.2'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
 
-
+    compile 'org.javassist:javassist:3.18.0-GA'
 }
 
 
