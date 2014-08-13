@@ -9,3 +9,12 @@ repositories {
 dependencies {
     compile 'org.javassist:javassist:3.18.0-GA'
 }
+
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.0.3'
+    }
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
