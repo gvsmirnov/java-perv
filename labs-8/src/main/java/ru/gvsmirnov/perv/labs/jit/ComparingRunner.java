@@ -17,8 +17,8 @@ public class ComparingRunner {
     public static void runBenchmarks(Class<?> clazz) throws RunnerException {
         ChainedOptionsBuilder base = new OptionsBuilder()
                 .include(clazz.getSimpleName())
-                .warmupIterations(5)
-                .measurementIterations(5)
+                .warmupIterations(20)
+                .measurementIterations(20)
                 .forks(1);
 
         Collection<RunResult> jitResult = new Runner(base.build()).run();
@@ -28,8 +28,8 @@ public class ComparingRunner {
 
         System.out.println("");
 
-        printResult("jit", intResult);
-        printResult("int", jitResult);
+        printResult("int", intResult);
+        printResult("jit", jitResult);
     }
 
     private static void printResult(String label, Collection<RunResult> runResults) {
