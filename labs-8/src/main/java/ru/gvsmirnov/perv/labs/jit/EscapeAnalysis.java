@@ -35,6 +35,12 @@ public class EscapeAnalysis {
     }
 
     @Benchmark
+    public int measureDeadCode() {
+        Convict convict = new Convict(id);
+        return this.id;
+    }
+
+    @Benchmark
     public int measureNoEscape() {
         return new Convict(id).id;
     }
