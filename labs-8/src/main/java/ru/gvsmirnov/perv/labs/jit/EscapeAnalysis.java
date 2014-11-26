@@ -5,10 +5,8 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.runner.RunnerException;
 
-import static ru.gvsmirnov.perv.labs.jit.ComparingRunner.runBenchmarks;
-
 @State(Scope.Benchmark)
-public class EscapeAnalysis {
+public class EscapeAnalysis extends ComparingBenchmark {
     public int id = (int) (Math.random() * Integer.MAX_VALUE);
 
     public static class Convict {

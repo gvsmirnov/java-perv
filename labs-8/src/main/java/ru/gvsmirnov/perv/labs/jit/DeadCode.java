@@ -3,13 +3,11 @@ package ru.gvsmirnov.perv.labs.jit;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.RunnerException;
 
-import static ru.gvsmirnov.perv.labs.jit.ComparingRunner.runBenchmarks;
-
 /**
  * TODO: link to the blog post
  */
 @State(Scope.Benchmark)
-public class DeadCode {
+public class DeadCode extends ComparingBenchmark {
 
     private double value= Math.random() * Integer.MAX_VALUE;
 
