@@ -24,6 +24,8 @@ public class EscapeAnalysis extends ComparingBenchmark {
 
     @Benchmark
     public int baseline_returnInt() {
+        // TODO: for some reason, this yields larger error
+        // than measureNoEscape or measureDeadCode.
         return this.id;
     }
 
