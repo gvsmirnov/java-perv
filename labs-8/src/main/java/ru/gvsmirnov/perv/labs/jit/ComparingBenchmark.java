@@ -53,14 +53,10 @@ public class ComparingBenchmark {
     }
 
     private static void printResult(Collection<RunResult> runResults) {
-        PrintWriter writer = new PrintWriter(System.out);
+        System.out.println();
 
-        writer.println();
-
-        ResultFormat resultFormat = ResultFormatFactory.getInstance(ResultFormatType.TEXT, writer);
-
+        ResultFormat resultFormat = ResultFormatFactory.getInstance(ResultFormatType.TEXT, System.out);
         resultFormat.writeOut(runResults);
-        writer.flush();
     }
 
 }

@@ -37,12 +37,12 @@ public abstract class TimeKiller {
 
     public static class Burner extends TimeKiller {
         @Override
-        public void tryKill(long _) {}
+        public void tryKill(long l) {}
     }
 
     public static class Yielder extends TimeKiller {
         @Override
-        public void tryKill(long _) {
+        public void tryKill(long l) {
             Thread.yield();
         }
     }
