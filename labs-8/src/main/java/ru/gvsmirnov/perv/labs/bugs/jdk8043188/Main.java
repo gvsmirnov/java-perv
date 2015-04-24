@@ -4,17 +4,24 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class Main {
 
-    private static interface Child1 extends InterfaceWithField {
+    private interface Child1 extends InterfaceWithField {
         long childId = register("Child1");
     }
 
-    private static interface Child2 extends InterfaceWithFieldAndDefaultMethod {
+    private interface Child2 extends InterfaceWithFieldAndDefaultMethod {
         long childId = register("Child2");
     }
 
+    private static class ChildClass implements InterfaceWithFieldAndDefaultMethod {
+
+    }
+
     public static void main(String[] args) {
-        println("Observed:   Child1 -> %d", Child1.childId);
-        println("Observed:   Child2 -> %d", Child2.childId);
+//        println("Observed:   Child1 -> %d", Child1.childId);
+//        println("Observed:   Child2 -> %d", Child2.childId);
+
+        ChildClass c = new ChildClass();
+        c.getTime();
     }
 
     private static final AtomicLong currentId = new AtomicLong(1);
