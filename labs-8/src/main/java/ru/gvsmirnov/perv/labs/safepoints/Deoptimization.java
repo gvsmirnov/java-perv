@@ -19,17 +19,11 @@ public class Deoptimization {
         runManyTimes(new Burner2()); // Assumption fails
     }
 
-    private static void burn(long nanos) {
-        long endTime = System.nanoTime() + nanos;
-        while (System.nanoTime() < endTime);
-    }
-
     private static void runManyTimes(Burner burner) {
         for(int i = 0; i < 100_000; i++) {
             burner.burn(10);
         }
     }
-
 
     private static class Burner1 implements Burner {
 
