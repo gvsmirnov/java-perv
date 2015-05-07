@@ -49,7 +49,6 @@ public class WeakReferences {
             for(int i = 0; i < size; i ++) {
                 weakRefs.poll();
             }
-            System.out.println("Cleaned out");
         }
 
         private static void setup() {
