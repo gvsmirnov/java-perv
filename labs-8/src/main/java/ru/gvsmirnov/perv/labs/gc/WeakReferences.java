@@ -8,9 +8,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class WeakReferences {
 
-//    private static final boolean DO_WEAK_REFERENCES  = Boolean.getBoolean("weak.refs");
-//    private static final boolean DO_WEAK_REFERENCES  = false;
-    private static final boolean DO_WEAK_REFERENCES  = true;
+    private static final boolean DO_WEAK_REFERENCES  = Boolean.getBoolean("weak.refs");
 
     // Run with: -verbose:gc -Xmx64m -XX:MaxTenuringThreshold=0
     // Observe that there are only young GCs
