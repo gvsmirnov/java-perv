@@ -12,6 +12,8 @@ dependencies {
     compile 'org.openjdk.jmh:jmh-core:1.6.1'
     compile 'org.openjdk.jmh:jmh-generator-annprocess:1.6.1'
 
+    compile 'org.openjdk.jol:jol-core:0.3.1'
+
     compile 'args4j:args4j:2.0.26'
 
     compile 'com.fasterxml.jackson.core:jackson-core:2.3.2'
