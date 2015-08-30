@@ -45,7 +45,7 @@ task jniHeaders {
     }
 }
 
-task jarWithNatives(type: OneJar, dependsOn: ['mainSharedLibrary']) {
+task jarWithNatives(type: OneJar, dependsOn: [jniHeaders, 'mainSharedLibrary']) {
     mainClass = 'ru.gvsmirnov.perv.labs.rekt.ChecksumCalculator'
     archiveName = 'checksum.jar'
     binLib = files(file('build/binaries/mainSharedLibrary/').listFiles())
