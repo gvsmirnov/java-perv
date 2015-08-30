@@ -7,7 +7,7 @@ Unless you absolutely have to, or just feel like it, in which case totally do!
 labs-time
 ---------
 A tool that tries to empirically estimate the precision of various ways to
-bide your time in java..
+bide your time in java.
 
 Usage:
 ```
@@ -15,7 +15,6 @@ cd labs-8/
 gradle clean shadow
 java -XX:-UseBiasedLocking -cp build/libs/perverted-labs-0.1.jar ru.gvsmirnov.perv.labs.time.PrecisionTest
 ```
-
 
 To make sure that you are not getting rubbish results due to internal VM activity, run it with
 ```

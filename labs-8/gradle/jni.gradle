@@ -1,4 +1,5 @@
 apply plugin: 'c'
+apply plugin: 'gradle-one-jar'
 
 model {
     components {
@@ -42,4 +43,10 @@ task jniHeaders {
             args 'ru.gvsmirnov.perv.labs.rekt.ChecksumCalculator'
         }
     }
+}
+
+task jarWithNatives(type: OneJar, dependsOn: ['mainSharedLibrary']) {
+    mainClass = 'ru.gvsmirnov.perv.labs.rekt.ChecksumCalculator'
+    archiveName = 'checksum.jar'
+    binLib = files(file('build/binaries/mainSharedLibrary/').listFiles())
 }
