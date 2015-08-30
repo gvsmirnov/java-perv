@@ -1,7 +1,36 @@
 #include "jni_exports.h"
 
+#ifndef MAX_FILE_NAME_LENGTH
+#define MAX_FILE_NAME_LENGTH 256
+#endif
+
+int digest(char *src_filename, char *dst_filename) {
+  FILE* digested = fopen(dst_filename, "w");
+
+  if(digested != NULL) {
+    //TODO: calculate actual checksum
+    fprintf(digested, "0\n");
+    fclose(digested);
+    return 0;
+  } else {
+    return 1;
+  }
+}
+
 JNIEXPORT jlong JNICALL Java_ru_gvsmirnov_perv_labs_rekt_ChecksumCalculator_calculateChecksum
   (JNIEnv * jniEnv, jclass clazz, jstring filename) {
-    printf("Hello, world!");
-    return 1337;
+
+    int result;
+    const char *src_filename;
+    char        dst_filename[MAX_FILE_NAME_LENGTH];
+
+    src_filename = (*jniEnv)->GetStringUTFChars(jniEnv, filename, NULL);
+
+    sprintf(dst_filename, "%s.digested", src_filename);
+
+    result = digest(src_filename, dst_filename);
+
+    (*jniEnv)->ReleaseStringUTFChars(jniEnv, filename, src_filename);
+
+    return result;
 }

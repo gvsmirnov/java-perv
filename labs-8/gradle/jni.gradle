@@ -22,6 +22,10 @@ model {
                     cCompiler.args '-I', "$javaHome/include/win32"
                 }
 
+                if(project.hasProperty('CHECKSUM_MAX_FILE_NAME_LENGTH')) {
+                    cCompiler.define 'MAX_FILE_NAME_LENGTH', project['CHECKSUM_MAX_FILE_NAME_LENGTH']
+                }
+
                 // TODO: refactor the above and support solaris and FreeBSD
             }
         }
@@ -48,5 +52,6 @@ task jniHeaders {
 task jarWithNatives(type: OneJar, dependsOn: [jniHeaders, 'mainSharedLibrary']) {
     mainClass = 'ru.gvsmirnov.perv.labs.rekt.ChecksumCalculator'
     archiveName = 'checksum.jar'
-    binLib = files(file('build/binaries/mainSharedLibrary/').listFiles())
+    //FIXME: de-hardcode
+    binLib = files('build/binaries/mainSharedLibrary/libmain.dylib')
 }
