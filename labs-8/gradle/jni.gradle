@@ -17,9 +17,11 @@ model {
                     cCompiler.args '-I', "$javaHome/include/linux"
                 }
 
-                if(targetPlatform.operatingSystem.win32) {
+                if(targetPlatform.operatingSystem.windows) {
                     cCompiler.args '-I', "$javaHome/include/win32"
                 }
+
+                // TODO: refactor the above and support solaris and FreeBSD
             }
         }
     }
