@@ -1,0 +1,32 @@
+apply plugin: 'c'
+
+model {
+    components {
+        main(NativeLibrarySpec) {
+            binaries.all {
+                cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include"
+
+                if(targetPlatform.operatingSystem.macOsX) {
+                    cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include/darwin"
+                }
+            }
+        }
+    }
+}
+
+task jniHeaders {
+    def headerFile = new File('src/main/headers/jni_exports.h')
+
+    inputs.files sourceSets.main.output
+    outputs.file headerFile
+    doLast {
+        headerFile.parentFile.mkdirs()
+        exec {
+            executable org.gradle.internal.jvm.Jvm.current().getExecutable('javah')
+            args '-o', headerFile
+            args '-classpath', sourceSets.main.output.classesDir
+            // TODO: do for each file
+            args 'ru.gvsmirnov.perv.labs.rekt.ChecksumCalculator'
+        }
+    }
+}

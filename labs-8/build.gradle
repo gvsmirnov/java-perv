@@ -31,3 +31,8 @@ buildscript {
 }
 
 apply plugin: 'com.github.johnrengelman.shadow'
+apply from: "$projectDir/gradle/jni.gradle"
+
+wrapper {
+    gradleVersion '2.6'
+}
