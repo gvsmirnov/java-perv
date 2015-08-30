@@ -11,7 +11,9 @@ public class ChecksumCalculator {
         System.loadLibrary("main");
 
         Stream.of(args)
-                .map(ChecksumCalculator::calculateChecksum)
-                .forEach(System.out::println);
+                .forEach(filename -> {
+                    long checksum = calculateChecksum(filename);
+                    System.out.println(filename + '\t' + checksum);
+                });
     }
 }

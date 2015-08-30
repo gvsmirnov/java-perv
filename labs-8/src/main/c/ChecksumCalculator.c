@@ -5,15 +5,16 @@
 #endif
 
 int digest(char *src_filename, char *dst_filename) {
+  int checksum = rand(); // TODO: calculate the actual checksum
+
   FILE* digested = fopen(dst_filename, "w");
 
   if(digested != NULL) {
-    //TODO: calculate actual checksum
-    fprintf(digested, "0\n");
+    fprintf(digested, "%d\n", checksum);
     fclose(digested);
-    return 0;
+    return checksum;
   } else {
-    return 1;
+    return -1;
   }
 }
 
