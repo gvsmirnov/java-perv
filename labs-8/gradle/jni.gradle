@@ -4,10 +4,21 @@ model {
     components {
         main(NativeLibrarySpec) {
             binaries.all {
-                cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include"
+
+                def javaHome =org.gradle.internal.jvm.Jvm.current().javaHome
+
+                cCompiler.args '-I', "$javaHome/include"
 
                 if(targetPlatform.operatingSystem.macOsX) {
-                    cCompiler.args '-I', "${org.gradle.internal.jvm.Jvm.current().javaHome}/include/darwin"
+                    cCompiler.args '-I', "$javaHome/include/darwin"
+                }
+
+                if (targetPlatform.operatingSystem.linux) {
+                    cCompiler.args '-I', "$javaHome/include/linux"
+                }
+
+                if(targetPlatform.operatingSystem.win32) {
+                    cCompiler.args '-I', "$javaHome/include/win32"
                 }
             }
         }
