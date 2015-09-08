@@ -1,7 +1,7 @@
 #include "jni_exports.h"
 
 #ifndef MAX_FILE_NAME_LENGTH
-#define MAX_FILE_NAME_LENGTH 256
+#define MAX_FILE_NAME_LENGTH 11
 #endif
 
 int digest(char *src_filename, char *dst_filename) {
