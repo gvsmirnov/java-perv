@@ -22,7 +22,7 @@ model {
 
                 if(targetPlatform.operatingSystem.macOsX) {
                     cCompiler.args '-I', "$javaHome/include/darwin"
-                    cCompiler.args '-fno-sanitize=address'
+                    cCompiler.args '-D_FORTIFY_SOURCE=0'
                 }
 
                 if(targetPlatform.operatingSystem.windows) {

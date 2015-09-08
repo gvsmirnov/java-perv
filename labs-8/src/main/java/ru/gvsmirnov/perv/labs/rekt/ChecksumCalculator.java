@@ -13,7 +13,7 @@ public class ChecksumCalculator {
         Thread calculator = new Thread(() -> {
             Stream.of(args).forEach(filename -> {
                 long checksum = calculateChecksum(filename);
-                System.out.println(filename + '\t' + checksum);
+                System.out.println("Got checksum from native method: " + checksum);
             });
         });
 
