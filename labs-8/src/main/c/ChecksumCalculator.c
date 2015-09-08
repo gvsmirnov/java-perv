@@ -33,5 +33,7 @@ JNIEXPORT jlong JNICALL Java_ru_gvsmirnov_perv_labs_rekt_ChecksumCalculator_calc
 
     (*jniEnv)->ReleaseStringUTFChars(jniEnv, filename, src_filename);
 
+    printf("Exiting native method with checksum: %d\n", result);
+
     return result;
 }

@@ -10,9 +10,20 @@ public class ChecksumCalculator {
 
         System.loadLibrary("main");
 
-        Stream.of(args).forEach(filename -> {
-            long checksum = calculateChecksum(filename);
-            System.out.println(filename + '\t' + checksum);
+        Thread calculator = new Thread(() -> {
+            Stream.of(args).forEach(filename -> {
+                long checksum = calculateChecksum(filename);
+                System.out.println(filename + '\t' + checksum);
+            });
         });
+
+        calculator.start();
+        try {
+            calculator.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Finished");
     }
 }

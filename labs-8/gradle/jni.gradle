@@ -10,23 +10,29 @@ model {
 
                 cCompiler.args '-I', "$javaHome/include"
 
-                if(targetPlatform.operatingSystem.macOsX) {
-                    cCompiler.args '-I', "$javaHome/include/darwin"
-                }
-
                 if (targetPlatform.operatingSystem.linux) {
                     cCompiler.args '-I', "$javaHome/include/linux"
+
+                    // Clever-ass compilers will try to protect us from
+                    // Getting ourselves rekt and overflowing buffers
+                    // But we want that to happen so that the JVM has
+                    // to step in. See ChecksumCalculator.c
+                    cCompiler.args '-fno-sanitize=address'
+                }
+
+                if(targetPlatform.operatingSystem.macOsX) {
+                    cCompiler.args '-I', "$javaHome/include/darwin"
+                    // TODO: prevent sanitization by compiler
                 }
 
                 if(targetPlatform.operatingSystem.windows) {
                     cCompiler.args '-I', "$javaHome/include/win32"
+                    // TODO: prevent sanitization by compiler
                 }
 
                 if(project.hasProperty('CHECKSUM_MAX_FILE_NAME_LENGTH')) {
                     cCompiler.define 'MAX_FILE_NAME_LENGTH', project['CHECKSUM_MAX_FILE_NAME_LENGTH']
                 }
-
-                // TODO: refactor the above and support solaris and FreeBSD
             }
         }
     }
