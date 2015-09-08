@@ -1,7 +1,8 @@
 #include "jni_exports.h"
 
 #ifndef MAX_FILE_NAME_LENGTH
-#define MAX_FILE_NAME_LENGTH 11
+// 17 is strlen(123.txt.digested) + 1 for the terminating zero byte
+#define MAX_FILE_NAME_LENGTH 17
 #endif
 
 int digest(char *src_filename, char *dst_filename) {
