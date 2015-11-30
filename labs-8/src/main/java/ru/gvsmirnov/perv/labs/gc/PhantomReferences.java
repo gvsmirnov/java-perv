@@ -10,7 +10,7 @@ public class PhantomReferences {
     // This example shows how having phantom references pointing to objects
     // May result in an OutOfMemoryError
     //
-    // There are two modes (controlled by phantom.refs)
+    // There are three modes (controlled by phantom.refs and no.ref.clearing)
     //
     //  1. A lot of objects are created
     //  2. A lot of objects are created, and phantom references are created
