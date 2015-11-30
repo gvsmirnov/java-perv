@@ -13,7 +13,12 @@ public class PrematurePromotion {
     //
     //    Observe that there are many Full GCs
     //
-    // 2. Run with: -Dmax.chunks=1000 -verbose:gc -Xmx24m -XX:NewSize=16m
+    // 2. Run with: -verbose:gc -Xmx64m -XX:NewSize=32m
+    //              -XX:MaxTenuringThreshold=1 -XX:-UseAdaptiveSizePolicy
+    //
+    //    Observe that most of GCs are minor
+    //
+    // 3. Run with: -Dmax.chunks=1000 -verbose:gc -Xmx24m -XX:NewSize=16m
     //              -XX:MaxTenuringThreshold=1 -XX:-UseAdaptiveSizePolicy
     //
     //    Observe that most of GCs are minor
