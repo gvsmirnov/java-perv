@@ -50,7 +50,7 @@ public class WeakReferences {
         System.out.printf("Buffer size: %d; Object size: %d; Weak refs for all: %s%n", BUFFER_SIZE, OBJECT_SIZE, WEAK_REFS_FOR_ALL);
 
         final Object substitute = makeObject(); // We want to create it in both scenarios so the footprint matches
-        final WeakReference[] weakRefs = new WeakReference[BUFFER_SIZE];
+        final Object[] refs = new Object[BUFFER_SIZE];
 
         System.gc(); // Clean up young gen
 
@@ -62,10 +62,10 @@ public class WeakReferences {
                 object = substitute;
             }
 
-            weakRefs[index++] = new WeakReference<>(object);
+            refs[index++] = new WeakReference<>(object);
 
             if (index == BUFFER_SIZE) {
-                Arrays.fill(weakRefs, null);
+                Arrays.fill(refs, null);
                 index = 0;
             }
         }
