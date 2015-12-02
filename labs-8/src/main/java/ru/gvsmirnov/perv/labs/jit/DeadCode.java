@@ -31,6 +31,6 @@ public class DeadCode extends ComparingBenchmark {
     }
 
     public static void main(String[] args) throws RunnerException {
-        runBenchmarks(DeadCode.class);
+        runBenchmarks_JIT_vs_Interpreter(DeadCode.class);
     }
 }

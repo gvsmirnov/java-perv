@@ -46,7 +46,7 @@ public class EscapeAnalysis extends ComparingBenchmark {
     }
 
     public static void main(String[] args) throws RunnerException {
-        runBenchmarks(EscapeAnalysis.class);
+        runBenchmarks_NoEscape(EscapeAnalysis.class);
     }
 
 }
