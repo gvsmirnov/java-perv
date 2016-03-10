@@ -5,7 +5,7 @@ import java.nio.charset.Charset;
 import java.security.SecureClassLoader;
 import java.util.ArrayList;
 
-public class Metaspace {
+public class MetaspaceOom {
 
     public static volatile Object sink;
 
