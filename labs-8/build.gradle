@@ -37,3 +37,25 @@ apply from: "$projectDir/gradle/jni.gradle"
 wrapper {
     gradleVersion '2.6'
 }
+
+
+task bloatedAgentJar(type: Jar, dependsOn: ['jar']) {
+    archiveName = 'bloated-agent.jar'
+
+
+    manifest {
+        attributes(
+                "Premain-Class": "ru.gvsmirnov.perv.labs.agent.BloatedAgent",
+                "Main-Class":    "ru.gvsmirnov.perv.labs.gc.Metaspace",
+                "Can-Retransform-Classes": "true"
+        )
+    }
+
+    from {
+        configurations.compile.collect {
+            zipTree(it).matching { exclude 'META-INF/**' }
+        }
+    }
+
+    from zipTree(jar.archivePath)
+}
