@@ -10,57 +10,58 @@ public class MetaspaceOom {
     public static volatile Object sink;
 
     public static void main(String[] args) throws InterruptedException {
-
         final int pid = getPid();
         final long startMemory = getMemoryUsage(pid); // To load the required classes
         final long startTime = System.currentTimeMillis();
 
-        final Class<?> sourceClass = CombinatorialExplosion_XXXXXX.class;
-        final CloneClassLoader loader = new CloneClassLoader(sourceClass.getClassLoader(), sourceClass.getName());
-        final String baseName = sourceClass.getName().substring(0, sourceClass.getName().length() - 6);
-
-        int classesLoaded = 0;
+        final BottomlessClassLoader loader = new BottomlessClassLoader();
 
         try {
-            for (;;) {
-                String className = String.format("%s%06d", baseName, classesLoaded++);
-                sink = loader.loadClass(className);
-
-                if (classesLoaded % 100 == 0) {
-                    System.err.println("Loaded " + classesLoaded + " classes");
-                }
-
+            while (true) {
+                loader.loadAnotherClass();
             }
         } catch (OutOfMemoryError e) {
             long elapsed = System.currentTimeMillis() - startTime;
             long memoryUsage = getMemoryUsage(pid);
             System.err.println(
-                    "Got an OOM: " + e.getMessage() + " after loading " + classesLoaded +
-                            " classes in " + elapsed + " ms, memory: " + (memoryUsage / 1024 / 1024) + "M");
+                    "Got an OOM: " + e.getMessage() + " after loading " + loader.classesLoaded +
+                    " classes in " + elapsed + " ms, memory: " + (memoryUsage / 1024 / 1024) + "M");
         } catch (ClassNotFoundException e) {
             System.err.println("Class generation failed.");
         }
     }
 
-    public static class CloneClassLoader extends SecureClassLoader {
+    public static class BottomlessClassLoader extends SecureClassLoader {
+
+        public static volatile Object sink;
+
         private byte[] classBytes;
         private final String className;
         private final byte[] classNameBytes;
         private final ArrayList<Integer> replaceLocations;
+        private final Class<?> sourceClass = CombinatorialExplosion_XXXXXX.class;
+        private final String baseName = sourceClass.getName().substring(0, sourceClass.getName().length() - 6);
 
         private final Charset UTF8_CHARSET = Charset.forName("UTF-8");
 
-        public CloneClassLoader(ClassLoader parent, String className) {
-            super(parent);
+        private int classesLoaded = 0;
+
+        public BottomlessClassLoader() {
+            super(BottomlessClassLoader.class.getClassLoader());
 
             this.classBytes = null;
-            this.className = className.replace('.', '/');
+            this.className = sourceClass.getName().replace('.', '/');
             this.classNameBytes = this.className.getBytes(UTF8_CHARSET);
             this.replaceLocations = new ArrayList<>();
 
             if (loadClassBuffer(className)) {
                 findNameLocations();
             }
+        }
+
+        public void loadAnotherClass() throws ClassNotFoundException {
+            String className = String.format("%s%06d", baseName, classesLoaded++);
+            sink = loadClass(className);
         }
 
         protected byte[] streamToByteArray(InputStream input) throws IOException {

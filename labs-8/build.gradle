@@ -46,7 +46,7 @@ task bloatedAgentJar(type: Jar, dependsOn: ['jar']) {
     manifest {
         attributes(
                 "Premain-Class": "ru.gvsmirnov.perv.labs.agent.BloatedAgent",
-                "Main-Class":    "ru.gvsmirnov.perv.labs.gc.Metaspace",
+                "Main-Class":    "ru.gvsmirnov.perv.labs.gc.MetaspaceOom",
                 "Can-Retransform-Classes": "true"
         )
     }
